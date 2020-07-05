@@ -1,4 +1,4 @@
-Django==1.11
+Django==1.11.29
 django-bootstrap==0.2.4
 django-bootstrap3==12.1.0
 pytz==2020.1
