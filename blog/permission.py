@@ -3,6 +3,7 @@ from django.core.exceptions import PermissionDenied
 
 class AdminPermissionMixin(object):
     def has_permissions(self):
+        print 'check permission'
         return self.request.user.is_superuser
 
     def dispatch(self, request, *args, **kwargs):

@@ -1,5 +1,6 @@
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, TemplateView, RedirectView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -102,8 +103,11 @@ class PostPublishView(AdminPermissionMixin, RedirectView):
     url = reverse_lazy('post_list')
 
     def get(self, request, *args, **kwargs):
-        post = get_object_or_404(Post, pk=self.kwargs['pk'])
-        post.publish()
+        try:
+            post = Post.objects.get(pk=self.kwargs['pk'])
+            post.publish()
+        except Exception, e:
+            raise Http404('Post does not exist')
         return super(PostPublishView, self).get(request, *args, **kwargs)
 
 
