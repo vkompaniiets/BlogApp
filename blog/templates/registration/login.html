@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+
+{% load add_class_tag %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-6">
+		<h2><i class="fa fa-lock"></i> PRIVATE ACCESS ONLY</h2> 
+		<br>
+		 <h4>THIS IS A <b>PRIVATE BLOG.</b> <br>
+		 ONLY <b>OWNER(S)</b> CAN LOG-IN.</h4>
+
+		 <br> 
+		 Contact me:
+		 <br>
+		 kompaniiets.vladyslav@gmail.com
+		 <br/>
+	</div>
+	<div class="col-md-6">
+	 	{% if form.errors %}
+		<p class="text-danger">Your username and password didn't match. Please try again.</p>
+		{% endif %}
+		<form method="post" action="{% url 'login' %}">
+			{% csrf_token %}
+			<div class="form-group">
+				{{ form.username.label_tag }}
+				{{ form.username | addclass:"form-control" }}
+			</div>
+			<div class="form-group">
+				{{ form.password.label_tag }}
+				{{ form.password | addclass:"form-control" }}
+			</div>
+
+			<input type="submit" class="btn btn-primary" value="login" />
+			<input type="hidden" name="next" value="{{ next }}" />
+		</form>
+	</div>
+</div>
+
+
+{% endblock %}

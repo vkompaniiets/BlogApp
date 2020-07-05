@@ -1,0 +1,36 @@
+<div class="col-md-4">
+{% load staticfiles %}
+    <!-- Info -->
+    <div class="well">
+        <center>
+            <img src="{% static 'img/avatar.png' %}" class="img-circle" alt="User Image" height="180" width="180">
+            <h4>BLOG</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+            <a href="{% url 'about' %}">View more</a>
+        </center>
+    </div>
+    <!-- Search -->
+    <form action="{% url 'search_results' %}" method="get">
+        <div class="input-group">
+            <input name="q" type="text" placeholder="Search..." class="form-control">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </form>
+    <!-- Tags -->
+    <h3 class="logo-text">Top 5 tags</h3>
+    <div class="row">
+        <div class="col-lg-6">
+            <ul class="list-unstyled">
+            {% for tag in tags %}
+                <li>
+                    <a href="{% url 'filter_by_tag' pk=tag.pk %}">{{ tag.name }} ({{ tag.tags_count }})</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+
+{% load add_class_tag %}
+
+
+{% block content %}
+    <h1>New post</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        <div class="form-group">
+            {{ form.title.label_tag }}
+            {{ form.title | addclass:"form-control" }}
+        </div>
+        <div class="form-group">
+            {{ form.tags.label_tag }}
+            {{ form.tags }}
+            {{ form.tags.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.text.label_tag }}
+            {{ form.text | addclass:"form-control" }}
+        </div>
+        <input class="hidden" name="author" value="{{ request.user }}">
+        <div class="text-center">
+            <button type="submit" class="save btn btn-primary btn-lg">Save</button>
+        </div>
+    </form>
+{{ form.media }}
+{% endblock %}

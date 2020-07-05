@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="col-md-12">
+          <div class="well">
+              <h4>Tag: <b>{{ tag }}</b> </h4>
+          </div>
+          <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th>Post</th>
+                      <th>Created by</th>
+                      <th>Tags</th>
+                      <th>Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {% for post in posts %}
+                  <tr>
+                      <td><h4><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h4></td>
+                      <td>{{ post.author.username }}</td>
+                      <td>
+                          {% for tag in post.tags.all %}
+                              <a href="{% url 'filter_by_tag' pk=tag.pk %}">{{ tag.name }}</a>
+                          {% endfor %}
+                      </td>
+                      <td>{{ post.published_at }}</td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+          <br/><br/>
+    </div>
+{% endblock %}
